@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DEO Male Swat - School Data Management</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f6f9;color:#17212b}
+header{background:#0b5d4b;color:white;padding:18px 16px;position:sticky;top:0;z-index:5}
+header h1{font-size:20px;margin:0 0 5px}header p{margin:0;font-size:13px;opacity:.9}
+nav{display:flex;gap:8px;overflow:auto;background:white;padding:10px;border-bottom:1px solid #ddd;position:sticky;top:73px;z-index:4}
+nav button{border:0;background:#eef3f1;padding:10px 13px;border-radius:10px;white-space:nowrap;font-size:14px}
+nav button.active{background:#0b5d4b;color:#fff}
+main{padding:14px;max-width:900px;margin:auto}.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.card{background:#fff;border-radius:14px;padding:15px;box-shadow:0 2px 8px #0000000b;margin-bottom:12px}
+.stat b{display:block;font-size:25px;margin-top:6px}.stat span{font-size:13px;color:#667}
+h2{font-size:19px;margin:10px 0 14px}.row{display:flex;justify-content:space-between;gap:10px;align-items:center}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:11px 7px;border-bottom:1px solid #eee;text-align:right}th{background:#f6f8f8}
+.badge{padding:5px 8px;border-radius:20px;font-size:11px}.ok{background:#dff5e9;color:#17663d}.pending{background:#fff0cf;color:#875d00}
+input,select,textarea{width:100%;padding:11px;border:1px solid #d5dde0;border-radius:9px;margin:5px 0 12px;font-size:14px}
+label{font-size:13px;font-weight:bold}.btn{background:#0b5d4b;color:white;border:0;border-radius:9px;padding:11px 15px;font-size:14px}.btn.secondary{background:#e8efed;color:#174c41}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}
+.notice{background:#e9f6f2;border-right:4px solid #0b5d4b;padding:12px;border-radius:8px;margin-bottom:12px;font-size:13px}
+@media(max-width:560px){.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.cards{grid-template-columns:1fr 1fr}table{font-size:12px}}
+</style>
+</head>
+<body>
+<header><h1>DEO Male Swat</h1><p>School Data Management System • Admin Prototype</p></header>
+<nav>
+<button class="active" onclick="show('dash',this)">Dashboard</button>
+<button onclick="show('schools',this)">Schools</button>
+<button onclick="show('requests',this)">Data Requests</button>
+<button onclick="show('students',this)">Students</button>
+<button onclick="show('teachers',this)">Teachers</button>
+<button onclick="show('reports',this)">Reports</button>
+</nav>
+<main>
+<section id="dash" class="page active">
+<h2>Admin Dashboard</h2>
+<div class="cards">
+<div class="card stat">کل سکول<b>120</b><span>رجسٹرڈ</span></div>
+<div class="card stat">Submitted<b>95</b><span>ڈیٹا جمع</span></div>
+<div class="card stat">Pending<b>25</b><span>باقی</span></div>
+<div class="card stat">طلبہ<b>18,540</b><span>مجموعی ریکارڈ</span></div>
+</div>
+<div class="card">
+<h2>حالیہ Data Request</h2>
+<div class="notice"><b>Student & Teacher Record 2026</b><br>آخری تاریخ: 10-10-2026</div>
+<div class="row"><span>95 سکولوں نے جمع کیا</span><span class="badge pending">25 Pending</span></div>
+</div>
+</section>
+
+<section id="schools" class="page">
+<h2>🏫 Schools</h2>
+<div class="card"><input id="schoolSearch" oninput="filterSchools()" placeholder="سکول تلاش کریں..."></div>
+<div class="card"><table><thead><tr><th>School</th><th>EMIS</th><th>Status</th></tr></thead>
+<tbody id="schoolRows">
+<tr><td>Govt High School Mingora</td><td>123456</td><td><span class="badge ok">Submitted</span></td></tr>
+<tr><td>Govt High School Saidu</td><td>123457</td><td><span class="badge pending">Pending</span></td></tr>
+<tr><td>Govt Primary School Matta</td><td>123458</td><td><span class="badge ok">Submitted</span></td></tr>
+<tr><td>Govt High School Kabal</td><td>123459</td><td><span class="badge pending">Pending</span></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="requests" class="page">
+<h2>📋 New Data Request</h2>
+<div class="card">
+<div class="formgrid">
+<div class="full"><label>Request Title</label><input placeholder="مثلاً Student & Teacher Record 2026"></div>
+<div><label>Data Type</label><select><option>Student Record</option><option>Teacher Record</option><option>Staff Record</option><option>All Records</option></select></div>
+<div><label>Deadline</label><input type="date"></div>
+<div class="full"><label>Schools</label><select><option>All Schools</option><option>Selected Schools</option></select></div>
+<div class="full"><label>Instructions</label><textarea rows="3" placeholder="سکولوں کے لیے ہدایات..."></textarea></div>
+</div>
+<button class="btn" onclick="alert('Prototype: Data Request تیار ہے۔ اصل ورژن میں یہ منتخب سکولوں کو بھیجی جائے گی۔')">SEND REQUEST</button>
+</div>
+</section>
+
+<section id="students" class="page">
+<h2>👨‍🎓 Student Record</h2>
+<div class="card">
+<div class="formgrid">
+<div><label>Student Name</label><input placeholder="طالب علم کا نام"></div>
+<div><label>Father Name</label><input placeholder="والد کا نام"></div>
+<div><label>Class</label><select><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select></div>
+<div><label>Gender</label><select><option>Male</option><option>Female</option></select></div>
+<div><label>Admission No.</label><input></div>
+<div><label>School EMIS</label><input></div>
+</div>
+<button class="btn" onclick="alert('Student record prototype میں محفوظ کیا گیا۔')">Save Record</button>
+</div>
+</section>
+
+<section id="teachers" class="page">
+<h2>👨‍🏫 Teacher Record</h2>
+<div class="card">
+<div class="formgrid">
+<div><label>Teacher Name</label><input></div><div><label>Employee ID</label><input></div>
+<div><label>Designation</label><input placeholder="مثلاً SST"></div><div><label>Subject</label><input></div>
+<div><label>BPS</label><input type="number"></div><div><label>School EMIS</label><input></div>
+</div>
+<button class="btn" onclick="alert('Teacher record prototype میں محفوظ کیا گیا۔')">Save Record</button>
+</div>
+</section>
+
+<section id="reports" class="page">
+<h2>📊 Reports</h2>
+<div class="card"><div class="row"><span>Data Request Completion</span><b>79%</b></div><hr>
+<p>Submitted: 95 schools</p><p>Pending: 25 schools</p>
+<button class="btn secondary" onclick="alert('اصل سسٹم میں Excel/PDF Export یہاں شامل ہوگا۔')">Export Excel / PDF</button></div>
+</section>
+</main>
+<script>
+function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');window.scrollTo(0,0)}
+function filterSchools(){let q=document.getElementById('schoolSearch').value.toLowerCase();document.querySelectorAll('#schoolRows tr').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?'':'none')}
+</script>
+</body></html>
