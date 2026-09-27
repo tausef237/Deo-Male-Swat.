@@ -110,6 +110,9 @@ label{font-size:13px;font-weight:bold}.btn{background:#0b5d4b;color:white;border
 <button class="btn secondary" onclick="alert('اصل سسٹم میں Excel/PDF Export یہاں شامل ہوگا۔')">Export Excel / PDF</button></div>
 </section>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
 <script>
 function show(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');window.scrollTo(0,0)}
 function filterSchools(){let q=document.getElementById('schoolSearch').value.toLowerCase();document.querySelectorAll('#schoolRows tr').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?'':'none')}
