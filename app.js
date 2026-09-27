@@ -1,4 +1,3 @@
-
 const { createClient } = supabase;
 
 const client = createClient(
@@ -8,11 +7,9 @@ const client = createClient(
 
 document.addEventListener("DOMContentLoaded", function () {
   const studentSection = document.getElementById("students");
-
   if (!studentSection) return;
 
   const saveButton = studentSection.querySelector(".btn");
-
   if (!saveButton) return;
 
   saveButton.addEventListener("click", async function (event) {
@@ -30,8 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
     saveButton.textContent = "Saving...";
 
     const { error } = await client
-      .from("student")
-      .insert([{ name: studentName }]);
+      .from("students")
+      .insert([
+        {
+          full_name: studentName
+        }
+      ]);
 
     saveButton.disabled = false;
     saveButton.textContent = "Save Record";
