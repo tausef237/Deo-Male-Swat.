@@ -6,31 +6,41 @@ const client = createClient(
   SUPABASE_PUBLISHABLE_KEY
 );
 
-const studentSection = document.getElementById("students");
+document.addEventListener("DOMContentLoaded", function () {
+  const studentSection = document.getElementById("students");
 
-if (studentSection) {
+  if (!studentSection) return;
+
   const saveButton = studentSection.querySelector(".btn");
 
-  if (saveButton) {
-    saveButton.onclick = async function () {
-      const inputs = studentSection.querySelectorAll("input");
-      const studentName = inputs[0]?.value?.trim();
+  if (!saveButton) return;
 
-      if (!studentName) {
-        alert("براہ کرم Student Name لکھیں");
-        return;
-      }
+  saveButton.addEventListener("click", async function (event) {
+    event.preventDefault();
 
-      const { error } = await client
-        .from("student")
-        .insert([{ name: studentName }]);
+    const inputs = studentSection.querySelectorAll("input");
+    const studentName = inputs[0]?.value?.trim();
 
-      if (error) {
-        alert("Error: " + error.message);
-        return;
-      }
+    if (!studentName) {
+      alert("براہ کرم Student Name لکھیں");
+      return;
+    }
 
-      alert("Student record Supabase میں محفوظ ہو گیا۔");
-    };
-  }
-}
+    saveButton.disabled = true;
+    saveButton.textContent = "Saving...";
+
+    const { error } = await client
+      .from("student")
+      .insert([{ name: studentName }]);
+
+    saveButton.disabled = false;
+    saveButton.textContent = "Save Record";
+
+    if (error) {
+      alert("Error: " + error.message);
+      return;
+    }
+
+    alert("Student record Supabase میں محفوظ ہو گیا۔");
+  });
+});
