@@ -45,3 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
     alert("Student record Supabase میں محفوظ ہو گیا۔");
   });
 });
+INSERT INTO public.schools (emis_code, school_name, status)
+VALUES
+('123456', 'Govt High School Mingora', 'Submitted'),
+('123457', 'Govt High School Saidu', 'Pending'),
+('123458', 'Govt Primary School Matta', 'Submitted'),
+('123459', 'Govt High School Kabal', 'Pending');
