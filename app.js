@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
     saveButton.textContent = "Saving...";
 
     const { error } = await client
-      .from("students")
+      .from("student")
       .insert([
         {
           full_name: studentName
