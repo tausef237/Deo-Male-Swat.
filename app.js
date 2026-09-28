@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .from("student")
       .insert([
         {
-          full_name: studentName
+          name: studentName
         }
       ]);
 
